@@ -26,27 +26,30 @@ def extract_unlinked_terms_from_readme(readme_path="README.md"):
         # Skip section headers, empty lines, and dividers
         if line.startswith('#') or line.strip() == '' or line.strip() == '---':
             continue
-            
-        # If the line has the format * [Term](link) (한글용어), skip it
-        if re.match(r'^\* \[[^\]]+\]\([^)]+\)', line.strip()):
+        
+        # Skip lines that have links (start with * [)
+        if line.strip().startswith('* ['):
             continue
         
-        # Only process lines that start with * and don't have a link
-        if not line.strip().startswith('*'):
-            continue
-            
-        # Extract terms in the format "* Term (한글용어)"
-        match = re.match(r'^\* ([^(]+)\s*(\([^)]+\))\s*(?:\*\*([^*]+)\*\*)?$', line.strip())
+        # Process lines that are not linked
+        # Format 1: Associative Memory (연상메모리)
+        match = re.match(r'^([^(]+)\s*(\([^)]+\)).*$', line.strip())
         if match:
             english_term = match.group(1).strip()
-            korean_term = match.group(2) if match.group(2) else ""
-            
-            # Sometimes the Korean term is in bold between ** **
-            if match.group(3):
-                if not korean_term:
-                    korean_term = f"({match.group(3).strip()})"
-                    
-            unlinked_terms.append((english_term, korean_term))
+            korean_term = match.group(2).strip()
+            if english_term and korean_term:
+                unlinked_terms.append((english_term, korean_term))
+                continue
+        
+        # Format 2: Term (Korean)
+        # This will catch other formats where the term and Korean translation are on the same line
+        words = line.strip().split()
+        if words and not line.strip().startswith('*') and '(' in line and ')' in line:
+            # Find the term and Korean translation
+            term_part = line.strip().split('(')[0].strip()
+            korean_part = '(' + line.strip().split('(', 1)[1].split(')', 1)[0] + ')'
+            if term_part and korean_part:
+                unlinked_terms.append((term_part, korean_part))
     
     return unlinked_terms
 
@@ -102,19 +105,23 @@ def update_readme_with_links(terms_with_files):
     with open("README.md", 'r', encoding='utf-8') as f:
         content = f.read()
     
-    updated_content = content
+    lines = content.split('\n')
+    new_lines = []
     
-    for term, korean_term, filename in terms_with_files:
-        # Create the pattern to match unlinked terms
-        term_pattern = re.escape(f"* {term} {korean_term}")
-        replacement = f"* [{term}](explanations/{filename}) {korean_term}"
+    for line in lines:
+        # Process each line to see if it contains an unlinked term
+        updated_line = line
+        for term, korean_term, filename in terms_with_files:
+            if term in line and korean_term in line and not line.strip().startswith('* ['):
+                # Create the linked format
+                updated_line = f"* [{term}](explanations/{filename}) {korean_term}"
+                break
         
-        # Replace the unlinked term with a linked term
-        updated_content = re.sub(term_pattern, replacement, updated_content)
+        new_lines.append(updated_line)
     
-    # Write the updated content back to README.md
+    # Write back the updated content
     with open("README.md", 'w', encoding='utf-8') as f:
-        f.write(updated_content)
+        f.write('\n'.join(new_lines))
     
     print(f"README.md updated with {len(terms_with_files)} new links")
 
@@ -131,6 +138,16 @@ def main():
             filtered_terms.append((term, korean_term))
     
     print(f"Filtered to {len(filtered_terms)} actual terms")
+    
+    # Skip if no terms found
+    if not filtered_terms:
+        print("No unlinked terms found to process.")
+        return
+    
+    # Print the terms that will be processed
+    print("Terms to be processed:")
+    for term, korean_term in filtered_terms:
+        print(f"- {term} {korean_term}")
     
     # First, check if Ollama is running
     try:
