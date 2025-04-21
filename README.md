@@ -6,7 +6,7 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 
 ---
 
-## 기초 개념 및 이론 (Foundational Concepts & Theory)
+## 기초 개념 및 이론
 
 Abduction (상정논법)  
 Actuator (액추에이터)  
@@ -119,7 +119,7 @@ Unsupervised Learning (자율학습)
 
 ---
 
-## 딥러닝 아키텍처 및 개념 (Deep Learning Architectures & Concepts)
+## 딥러닝 아키텍처 및 개념
 
 Activation Function (활성화 함수)  
 Attention (주의집중)  
@@ -152,7 +152,7 @@ Transfer Learning (전이 학습)
 
 ---
 
-## 모델 학습 및 평가 (Model Training & Evaluation)
+## 모델 학습 및 평가
 
 Adam **(Adam 옵티마이저)**   
 AUC (Area Under the Curve)  
@@ -180,7 +180,7 @@ Underfitting (과소적합)
 
 ---
 
-## MLOps, 배포 및 모니터링 (MLOps, Deployment & Monitoring)
+## MLOps, 배포 및 모니터링
 
 Concept Drift (개념 드리프트)  
 Containerization (컨테이너화)  
@@ -198,7 +198,7 @@ Privacy Preservation (프라이버시 보존)
 
 ---
 
-## 주요 프레임워크 및 라이브러리 (Key Frameworks & Libraries)
+## 주요 프레임워크 및 라이브러리
 
 Keras (케라스)  
 NumPy (넘파이)  
@@ -209,7 +209,7 @@ TensorFlow (텐서플로)
 
 ---
 
-## 기타 관련 분야 및 개념 (Other Related Fields & Concepts)
+## 기타 관련 분야 및 개념
 
 Few‑shot Learning **(소수 예제 학습)**   
 Time Series Analysis (시계열분석)  
