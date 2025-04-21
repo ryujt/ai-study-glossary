@@ -20,7 +20,7 @@ Artificial Brain (인공두뇌)
 Artificial Consciousness (인공의식)  
 Artificial Intelligence (인공지능)  
 Artificial Life (인공생명)  
-Associative Memory **(연상메모리)**
+Associative Memory **(연상메모리)**   
 Automata (오토마타)  
 Bayesian Inference (베이즈 추론)  
 Bayesian Network (베이즈 네트워크)  
@@ -84,10 +84,10 @@ Labeling (레이블링)
 PCA (주성분 분석)  
 t‑SNE (t‑분포 확률적 임베딩)  
 Text Mining (텍스트마이닝)  
-Tokenization **(토큰화)**
-Train/Test Split **(학습/테스트 분할)**
-Validation Set **(검증 데이터셋)**
-Word Embedding **(단어 임베딩)**
+Tokenization **(토큰화)**   
+Train/Test Split **(학습/테스트 분할)**   
+Validation Set **(검증 데이터셋)**   
+Word Embedding **(단어 임베딩)**   
 
 ---
 
@@ -97,7 +97,7 @@ A* Algorithm (A* 알고리즘)
 Adaline (아달라인)  
 Backward Chaining Inference (역방향추론)  
 Backtracking (역추적)  
-Bayesian Optimization **(베이지안 최적화)**
+Bayesian Optimization **(베이지안 최적화)**   
 Boltzmann Machine (볼쯔만 머신)  
 Breadth First Search (너비우선 탐색)  
 Clustering (군집화)  
@@ -107,9 +107,9 @@ Ensemble Methods (앙상블 기법)
 Evolutionary Algorithm (진화알고리즘)  
 Evolutionary Programming (진화프로그래밍)  
 Expectation Maximization Algorithm (기대치최대화 알고리즘)  
-Genetic Algorithm **(유전알고리즘)**
+Genetic Algorithm **(유전알고리즘)**   
 Gradient Boosting (그래디언트 부스팅)  
-Grid Search **(그리드 서치)**
+Grid Search **(그리드 서치)**   
 Hidden Markov Model (은닉 마르코프 모델)  
 Hopfield Network (홉필드 네트워크)  
 Kalman Filter (칼만필터)  
@@ -118,7 +118,7 @@ K‑Nearest Neighbor Classification (K‑최근린 분류)
 Naive Bayesian Classification (나이브 베이즈 분류)  
 Perceptron (퍼셉트론)  
 Random Forest (랜덤 포레스트)  
-Random Search **(랜덤 서치)**
+Random Search **(랜덤 서치)**   
 Reinforcement Learning (강화학습)  
 Self‑Organizing Map (자기조직화 지도)  
 Supervised Learning (지도학습)  
@@ -134,27 +134,27 @@ Attention (주의집중)
 Autoencoder (오토인코더)  
 Backpropagation (역전파)  
 Batch Normalization (배치 정규화)  
-BERT **(양방향 인코더 표현)**
+BERT **(양방향 인코더 표현)**   
 Convolutional Neural Network – CNN (컨볼루션 신경망)  
 Deep Learning (딥 러닝)  
-Dropout **(드롭아웃)**
+Dropout **(드롭아웃)**   
 Federated Learning (연합 학습)  
 Generative Adversarial Network – GAN (생성적 적대 신경망)  
-GPT **(사전학습 생성 변환기)**
+GPT **(사전학습 생성 변환기)**   
 Gradient Descent (기울기 하강)  
 Graph Neural Network – GNN (그래프 신경망)  
 GRU (Gated Recurrent Unit)  
 Long Short‑Term Memory – LSTM (장단기 메모리)  
-Max Pooling **(맥스 풀링)**
-Multi‑Head Attention **(다중 헤드 어텐션)**
+Max Pooling **(맥스 풀링)**   
+Multi‑Head Attention **(다중 헤드 어텐션)**   
 Multilayer Perceptron (다층 퍼셉트론)  
 Neural Network (신경망)  
 Recurrent Neural Network – RNN (순환 신경망)  
-Self‑Attention **(셀프 어텐션)**
+Self‑Attention **(셀프 어텐션)**   
 Self‑Supervised Learning (자기지도 학습)  
-Sigmoid **(시그모이드 함수)**
-Softmax **(소프트맥스 함수)**
-ReLU **(Rectified Linear Unit, 렐루)**
+Sigmoid **(시그모이드 함수)**   
+Softmax **(소프트맥스 함수)**   
+ReLU **(Rectified Linear Unit, 렐루)**   
 Transformer (트랜스포머)  
 Transfer Learning (전이 학습)  
 
@@ -163,28 +163,28 @@ Transfer Learning (전이 학습)
 ## 모델 학습 및 평가 (Model Training & Evaluation)
 
 Accuracy (정확도)  
-Adam **(Adam 옵티마이저)**
+Adam **(Adam 옵티마이저)**   
 AUC (Area Under the Curve)  
 Batch Size (배치 크기)  
 Bias (편향)  
-Confusion Matrix **(혼동 행렬)**
-Cross‑Entropy **(교차 엔트로피)**
+Confusion Matrix **(혼동 행렬)**   
+Cross‑Entropy **(교차 엔트로피)**   
 Cross‑Validation (교차 검증)  
-Early Stopping **(조기 종료)**
+Early Stopping **(조기 종료)**   
 Epoch (에포크)  
 F1 Score (F1 점수)  
 Hyperparameter Tuning (하이퍼파라미터 튜닝)  
-Learning Rate Scheduler **(학습률 스케줄러)**
+Learning Rate Scheduler **(학습률 스케줄러)**   
 Loss Function (손실 함수)  
-Mean Squared Error **(MSE, 평균 제곱 오차)**
+Mean Squared Error **(MSE, 평균 제곱 오차)**   
 Optimizer (옵티마이저)  
 Overfitting (과적합)  
 Precision (정밀도)  
 Recall (재현율)  
 Regularization (정규화)  
-RMSprop **(RMSprop 옵티마이저)**
+RMSprop **(RMSprop 옵티마이저)**   
 ROC Curve (ROC 곡선)  
-SGD **(Stochastic Gradient Descent, SGD)**
+SGD **(Stochastic Gradient Descent, SGD)**   
 Underfitting (과소적합)  
 
 ---
@@ -197,10 +197,10 @@ Concept Drift (개념 드리프트)
 Containerization (컨테이너화)  
 Data Drift (데이터 드리프트)  
 Distributed Computing (분산 컴퓨팅)  
-Experiment Tracking **(실험 추적)**
+Experiment Tracking **(실험 추적)**   
 Feature Store (피처 스토어)  
-Kubernetes **(쿠버네티스)**
-MLflow **(MLflow)**
+Kubernetes **(쿠버네티스)**   
+MLflow **(MLflow)**   
 MLOps (Machine Learning Operations)  
 Model Monitoring (모델 모니터링)  
 Model Quantization (모델 양자화)  
@@ -228,12 +228,13 @@ Augmented Reality (증강현실)
 Autonomous Car (자율주행차)  
 Chatbot (채팅로봇)  
 Face Recognition (얼굴인식)  
-Few‑shot Learning **(소수 예제 학습)**
+Few‑shot Learning **(소수 예제 학습)**   
 Image Understanding (영상이해)  
 Machine Translation (기계 번역)  
 Natural Language Processing (자연어처리)  
 Natural Language Understanding (자연어이해)  
-Prompt Engineering **(프롬프트 엔지니어링)**
+Prompt Engineering **(프롬프트 엔지니어링)**   
 Speech Synthesis (음성합성)  
 Time Series Analysis (시계열분석)  
-Zero‑shot Learning **(제로샷 학습)**
+Zero‑shot Learning **(제로샷 학습)**   
+
