@@ -12,14 +12,8 @@ Abduction (상정논법)
 Actuator (액추에이터)  
 Adaptive Resonance Theory (적응공명이론)  
 Agent (에이전트)  
-Algorithm (알고리즘)  
-AlphaGo (알파고)  
 Alpha‑Beta Pruning (알파베타 가지치기)  
 Approximate Reasoning (근사추론)  
-Artificial Brain (인공두뇌)  
-Artificial Consciousness (인공의식)  
-Artificial Intelligence (인공지능)  
-Artificial Life (인공생명)  
 Associative Memory **(연상메모리)**   
 Automata (오토마타)  
 Bayesian Inference (베이즈 추론)  
@@ -58,8 +52,6 @@ Pattern Recognition (패턴인식)
 Predicate Logic (술어논리)  
 Probabilistic Reasoning (확률추론)  
 Problem Solving (문제해결)  
-PROLOG (프롤로그)  
-Robot (로봇)  
 Rule‑base Expert System (규칙기반 전문가 시스템)  
 Semantic Network (의미망)  
 Semantic Web (의미웹)  
@@ -162,7 +154,6 @@ Transfer Learning (전이 학습)
 
 ## 모델 학습 및 평가 (Model Training & Evaluation)
 
-Accuracy (정확도)  
 Adam **(Adam 옵티마이저)**   
 AUC (Area Under the Curve)  
 Batch Size (배치 크기)  
@@ -191,15 +182,12 @@ Underfitting (과소적합)
 
 ## MLOps, 배포 및 모니터링 (MLOps, Deployment & Monitoring)
 
-API (Application Programming Interface)  
-Cloud Platforms (클라우드 플랫폼)  
 Concept Drift (개념 드리프트)  
 Containerization (컨테이너화)  
 Data Drift (데이터 드리프트)  
 Distributed Computing (분산 컴퓨팅)  
 Experiment Tracking **(실험 추적)**   
 Feature Store (피처 스토어)  
-Kubernetes **(쿠버네티스)**   
 MLflow **(MLflow)**   
 MLOps (Machine Learning Operations)  
 Model Monitoring (모델 모니터링)  
@@ -223,18 +211,7 @@ TensorFlow (텐서플로)
 
 ## 기타 관련 분야 및 개념 (Other Related Fields & Concepts)
 
-AI Language (인공지능 언어 – LISP, Prolog 등)  
-Augmented Reality (증강현실)  
-Autonomous Car (자율주행차)  
-Chatbot (채팅로봇)  
-Face Recognition (얼굴인식)  
 Few‑shot Learning **(소수 예제 학습)**   
-Image Understanding (영상이해)  
-Machine Translation (기계 번역)  
-Natural Language Processing (자연어처리)  
-Natural Language Understanding (자연어이해)  
-Prompt Engineering **(프롬프트 엔지니어링)**   
-Speech Synthesis (음성합성)  
 Time Series Analysis (시계열분석)  
 Zero‑shot Learning **(제로샷 학습)**   
 
