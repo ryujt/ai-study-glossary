@@ -13,13 +13,13 @@ MODEL_NAME = "gemma3:latest"  # Using the available gemma3:latest model
 OUTPUT_DIR = "explanations"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def extract_terms_from_readme(readme_path="README.md"):
-    """Extract all AI terms from README.md file."""
+def extract_unlinked_terms_from_readme(readme_path="README.md"):
+    """Extract AI terms without links from README.md file."""
     with open(readme_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
     # Extract all terms using regex
-    terms = []
+    unlinked_terms = []
     lines = content.split('\n')
     
     for line in lines:
@@ -27,16 +27,16 @@ def extract_terms_from_readme(readme_path="README.md"):
         if line.startswith('#') or line.strip() == '' or line.strip() == '---':
             continue
             
-        # Only process lines that start with English letters and have exactly one pair of parentheses
-        if not re.match(r'^[A-Za-z]', line.strip()):
+        # If the line has the format * [Term](link) (한글용어), skip it
+        if re.match(r'^\* \[[^\]]+\]\([^)]+\)', line.strip()):
+            continue
+        
+        # Only process lines that start with * and don't have a link
+        if not line.strip().startswith('*'):
             continue
             
-        # Count parentheses
-        if line.count('(') != 1 or line.count(')') != 1:
-            continue
-            
-        # Extract terms in the format "Term (한글용어)"
-        match = re.match(r'^([^(]+)\s*(\([^)]+\))\s*(?:\*\*([^*]+)\*\*)?$', line.strip())
+        # Extract terms in the format "* Term (한글용어)"
+        match = re.match(r'^\* ([^(]+)\s*(\([^)]+\))\s*(?:\*\*([^*]+)\*\*)?$', line.strip())
         if match:
             english_term = match.group(1).strip()
             korean_term = match.group(2) if match.group(2) else ""
@@ -46,9 +46,9 @@ def extract_terms_from_readme(readme_path="README.md"):
                 if not korean_term:
                     korean_term = f"({match.group(3).strip()})"
                     
-            terms.append((english_term, korean_term))
+            unlinked_terms.append((english_term, korean_term))
     
-    return terms
+    return unlinked_terms
 
 def generate_explanation_with_ollama(term, korean_term):
     """Call Ollama API to generate an explanation for a given term."""
@@ -97,15 +97,36 @@ def sanitize_filename(term):
     sanitized = re.sub(r'[^\w\._]', '', sanitized)
     return sanitized
 
+def update_readme_with_links(terms_with_files):
+    """Update README.md to add links to the generated explanation files."""
+    with open("README.md", 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    updated_content = content
+    
+    for term, korean_term, filename in terms_with_files:
+        # Create the pattern to match unlinked terms
+        term_pattern = re.escape(f"* {term} {korean_term}")
+        replacement = f"* [{term}](explanations/{filename}) {korean_term}"
+        
+        # Replace the unlinked term with a linked term
+        updated_content = re.sub(term_pattern, replacement, updated_content)
+    
+    # Write the updated content back to README.md
+    with open("README.md", 'w', encoding='utf-8') as f:
+        f.write(updated_content)
+    
+    print(f"README.md updated with {len(terms_with_files)} new links")
+
 def main():
     """Main function to process README and generate explanations."""
-    print("Extracting terms from README.md...")
-    terms = extract_terms_from_readme()
-    print(f"Found {len(terms)} terms")
+    print("Extracting unlinked terms from README.md...")
+    unlinked_terms = extract_unlinked_terms_from_readme()
+    print(f"Found {len(unlinked_terms)} unlinked terms")
     
     # Filter out any remaining terms that don't match criteria
     filtered_terms = []
-    for term, korean_term in terms:
+    for term, korean_term in unlinked_terms:
         if term and korean_term and term[0].isalpha():
             filtered_terms.append((term, korean_term))
     
@@ -121,6 +142,9 @@ def main():
         print("Please make sure Ollama is running and the model is available")
         return
     
+    # Keep track of terms and their corresponding files
+    terms_with_files = []
+    
     for i, (term, korean_term) in enumerate(filtered_terms):
         clean_term = term.strip()
         filename = sanitize_filename(clean_term) + ".md"
@@ -132,6 +156,7 @@ def main():
                 content = f.read()
             if "Ollama API 호출 중 오류가 발생했습니다" not in content and len(content) > 200:
                 print(f"[{i+1}/{len(filtered_terms)}] Skipping {clean_term} - explanation already exists")
+                terms_with_files.append((clean_term, korean_term, filename))
                 continue
         
         print(f"[{i+1}/{len(filtered_terms)}] Generating explanation for {clean_term} {korean_term}...")
@@ -146,10 +171,17 @@ def main():
         
         print(f"Saved explanation to {filepath}")
         
+        # Add to list of terms with files for updating README
+        terms_with_files.append((clean_term, korean_term, filename))
+        
         # Be nice to the API with a short delay between requests
         time.sleep(1)
     
-    print("All explanations generated!")
+    # Update README.md with links to generated explanations
+    if terms_with_files:
+        update_readme_with_links(terms_with_files)
+    
+    print("All explanations generated and README updated!")
 
 if __name__ == "__main__":
     main()
