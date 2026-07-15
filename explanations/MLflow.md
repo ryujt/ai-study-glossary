@@ -1,31 +1,64 @@
 # MLflow (MLflow)
 
-**MLflow (MLflow)**
+> **MLflow는 머신러닝 실험 기록부터 모델 버전 관리·배포까지, 모델의 한살이를 한 도구로 추적·관리하는 오픈소스 플랫폼이다.**
 
-1.  **정의:** MLflow는 머신러닝 실험의 생명주기를 관리하고 추적하기 위한 오픈소스 플랫폼입니다. MLflow는 모델 학습, 모델 관리, 모델 배포를 위한 다양한 도구와 기능을 제공합니다.
+## 실험 노트와 모델 창고를 합쳐 놓은 도구다
 
-2.  **핵심 개념:**
-    *   **실험 추적:** 다양한 실험 설정, 매개변수, 결과(메트릭, 학습 곡선 등)를 기록하여 최적의 모델을 찾도록 돕습니다.
-    *   **모델 등록:** 학습된 모델을 중앙 저장소에 등록하고 버전 관리합니다.
-    *   **모델 배포:** 등록된 모델을 다양한 환경(온프레미스, 클라우드)에 쉽게 배포합니다.
-    *   **파이프라인 구축:** 데이터 준비부터 모델 학습, 평가, 배포까지의 전체 머신러닝 파이프라인을 구축하고 관리합니다.
-    *   **협업:** 팀원 간의 협업을 용이하게 하여, 실험 결과 공유 및 재현성을 높입니다.
+모델을 만들다 보면 금방 이런 상황에 빠진다. "정확도 0.91 나왔던 그 모델, 학습률이 얼마였더라? 어느 데이터로 돌렸지? 파일이 `model_final_v3_real.pkl`이었나?" 손으로 스프레드시트에 적던 실험 기록은 금세 엉킨다. **MLflow는 이 뒤죽박죽을 대신 정리해 주는, 실험 노트와 모델 창고를 합친 도구다.**
 
-3.  **작동 방식:**
-    MLflow는 일반적으로 Python, R, Java 등 다양한 언어에서 사용되는 라이브러리 형태로 제공됩니다.
-    *   **실험 추적:**  `mlflow.start_run()` 함수를 호출하여 실험을 시작하고, `mlflow.log_param()`, `mlflow.log_metric()`, `mlflow.log_artifact()` 등의 함수를 사용하여 실험 데이터를 기록합니다.
-    *   **모델 등록:** `mlflow.sklearn.MLflowModel.save()` 또는 유사한 함수를 사용하여 학습된 모델을 저장하고, `mlflow.register_model()` 함수를 통해 모델을 MLflow 저장소에 등록합니다.
-    *   **배포:** MLflow Serving을 사용하여 등록된 모델을 API 엔드포인트로 배포하거나, 다양한 플랫폼(Kubernetes, Docker)에 배포합니다.
+MLflow는 크게 네 조각으로 나뉜다.
 
-4.  **응용 분야:**
-    *   **모델 개발:** 다양한 머신러닝 모델의 실험 및 성능 평가에 사용됩니다.
-    *   **데이터 과학:** 데이터 과학 프로젝트의 효율성을 높이고, 실험 결과를 쉽게 공유합니다.
-    *   **비즈니스 인텔리전스:** 예측 모델 개발 및 배포에 활용되어 비즈니스 의사 결정에 기여합니다.
-    *   **자동화된 머신러닝(AutoML):** AutoML 시스템의 일부로 활용되어 최적의 모델을 자동으로 찾습니다.
+| 구성 요소 | 하는 일 |
+|-----------|---------|
+| **Tracking** | 파라미터·지표·산출물을 실행(run) 단위로 기록하고 비교 ([실험 추적](Experiment_Tracking.md)) |
+| **Models** | 모델을 프레임워크 독립적인 표준 포맷으로 저장 |
+| **Model Registry** | 저장된 모델에 버전·단계(Staging/Production)를 붙여 중앙 관리 |
+| **Projects** | 실행 환경과 명령을 정의해 재현 가능하게 패키징 |
 
-5.  **관련 용어:**
-    *   **TensorFlow:** 딥러닝 모델 개발 프레임워크
-    *   **PyTorch:** 딥러닝 모델 개발 프레임워크
-    *   **Scikit-learn:** 머신러닝 모델 개발 라이브러리
-    *   **Docker:** 컨테이너 기술
-    *   **Kubernetes:** 컨테이너 오케스트레이션 플랫폼
+## 코드 몇 줄로 실험이 기록으로 남는다
+
+핵심은 `mlflow.start_run()`으로 실행을 열고, 그 안에서 파라미터·지표·모델을 로그로 남기는 것이다. 나중에 MLflow UI에서 실행들을 나란히 놓고 비교한다.
+
+```python
+import mlflow
+import mlflow.sklearn
+from sklearn.ensemble import RandomForestClassifier
+
+with mlflow.start_run():
+    n_estimators = 100
+    model = RandomForestClassifier(n_estimators=n_estimators)
+    model.fit(X_train, y_train)
+    acc = model.score(X_test, y_test)
+
+    mlflow.log_param("n_estimators", n_estimators)   # 하이퍼파라미터 기록
+    mlflow.log_metric("accuracy", acc)               # 성능 지표 기록
+    mlflow.sklearn.log_model(model, "model")         # 모델 자체를 산출물로 저장
+```
+
+저장한 모델은 명령 한 줄로 REST API 서버로 띄울 수 있다.
+
+```bash
+mlflow models serve -m runs:/<run_id>/model -p 5000
+```
+
+> 💡 **참고 — MLflow는 학습 프레임워크가 아니다.** 모델을 만드는 것은 [Scikit-learn](Scikitlearn.md), [PyTorch](PyTorch.md), [TensorFlow](TensorFlow.md) 같은 라이브러리의 몫이다. MLflow는 그 위에서 "무엇을 어떻게 돌렸고 결과가 어땠는지"를 붙잡아 두는 역할만 한다.
+
+## 흔한 오해
+
+> ⚠️ **흔한 오해 — "MLflow가 곧 MLOps다."**
+>
+> MLflow는 [MLOps](MLOps.md)를 실현하는 여러 도구 중 하나일 뿐이다. 실험 추적과 모델 레지스트리라는 조각을 담당하지만, CI/CD 파이프라인·인프라 자동화·운영 모니터링까지 통째로 해 주지는 않는다. MLOps는 방법론이고, MLflow는 그 방법론을 떠받치는 도구다.
+
+## 정리하면
+
+- MLflow는 **실험 기록·모델 저장·버전 관리·배포**를 하나로 묶은 오픈소스 플랫폼이다.
+- Tracking·Models·Model Registry·Projects 네 조각으로 이루어진다.
+- 학습 자체가 아니라 **실험과 모델의 이력을 관리**하는 도구다.
+- `log_param`·`log_metric`·`log_model` 몇 줄로 실험이 비교 가능한 기록으로 남는다.
+
+## 함께 읽기
+
+- [Experiment Tracking](Experiment_Tracking.md) — MLflow Tracking이 구현하는 바로 그 개념.
+- [MLOps](MLOps.md) — MLflow가 한 조각으로 들어가는 더 큰 그림.
+- [Model Serving](Model_Serving.md) — MLflow가 저장한 모델을 실제 서비스로 내보내는 단계.
+- [Model Monitoring](Model_Monitoring.md) — 배포한 모델을 계속 지켜보는 다음 단계.

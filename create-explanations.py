@@ -54,19 +54,25 @@ def extract_unlinked_terms_from_readme(readme_path="README.md"):
     return unlinked_terms
 
 def generate_explanation_with_ollama(term, korean_term):
-    """Call Ollama API to generate an explanation for a given term."""
-    prompt = f"""
-    '{term} {korean_term}'에 대해 다음 형식으로 설명해주세요:
+    """Call Ollama API to generate an explanation for a given term.
 
-    1. 정의: 간결하게 용어를 정의해주세요.
-    2. 핵심 개념: 이 용어와 관련된 핵심 개념 3-5개를 나열해주세요.
-    3. 작동 방식: 어떻게 작동하는지 설명해주세요.
-    4. 응용 분야: 이 개념/기술이 어디에 적용되는지 설명해주세요.
-    5. 관련 용어: 연관된 다른 AI 용어 3-5개를 나열해주세요.
-    
-    전문가처럼 정확하지만 초보자도 이해할 수 있게 작성해주세요.
-    답변 외의 문장은 절대 사용하지 말아주세요.
+    출력 문체·구조는 저장소의 AUTHORING.md 규칙을 따른다:
+    반말 평서문("~다"), 두괄식, 비유 먼저, 흔한 오해, 정리, 함께 읽기.
     """
+    prompt = f"""너는 AI 용어 사전의 저자다. '{term} ({korean_term})' 용어의 해설을 마크다운으로 작성한다.
+
+반드시 아래 규칙을 지킨다:
+- 어투는 반말 평서문 "~다"로만 쓴다. 존댓말("~습니다")은 한 문장도 쓰지 않는다.
+- 딱딱한 정의 나열로 시작하지 말고, 첫 줄에 한 문장 정의를 blockquote로 굵게 못 박는다.
+  예) > **{korean_term}은 ...하는 것이다.**
+- 이어서 비유나 큰 그림으로 개념을 손에 잡히게 심는다.
+- 소제목(##)은 "~에 대해"가 아니라 결론이 담긴 주장 문장으로 쓴다.
+- 입문자가 흔히 하는 오해를 하나 이상 짚는다: > ⚠️ **흔한 오해 — ...**
+- 마지막에 "## 정리하면"으로 3~4개 bullet 요약을 넣는다.
+- 이어서 "## 함께 읽기"로 관련 AI 용어 3~5개를 제시한다.
+- 정확성이 최우선이다. 근거 없는 단정이나 존재하지 않는 용어는 쓰지 않는다.
+- 문서 맨 위에 제목(# ...)은 넣지 않는다. 본문 마크다운만 출력한다.
+- 해설 외의 안내 문장(예: "다음은 ~입니다")은 쓰지 않는다."""
     
     payload = {
         "model": MODEL_NAME,
@@ -180,8 +186,15 @@ def main():
         
         # Call Ollama to generate explanation
         explanation = generate_explanation_with_ollama(clean_term, korean_term)
-        
-        # Create markdown file with explanation
+
+        # Strip a leading heading if the model repeated the title anyway,
+        # so we don't end up with a duplicate H1/H2 at the top of the file.
+        explanation = explanation.strip()
+        first_line = explanation.split('\n', 1)[0]
+        if first_line.startswith('#'):
+            explanation = explanation.split('\n', 1)[1].lstrip('\n') if '\n' in explanation else ''
+
+        # Create markdown file with a single H1 title followed by the body
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(f"# {clean_term} {korean_term}\n\n")
             f.write(explanation)

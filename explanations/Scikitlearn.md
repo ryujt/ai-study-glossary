@@ -1,41 +1,68 @@
 # Scikit‑learn (사이킷런)
 
-## Scikit-learn (사이킷런) 설명
+> **Scikit-learn은 파이썬에서 딥러닝을 뺀 고전 머신러닝을 표준화된 한 가지 사용법으로 묶어 놓은 라이브러리다.**
 
-**1. 정의:**
-Scikit-learn은 파이썬에서 머신러닝 모델을 구축하고 평가하는 데 사용되는 오픈 소스 라이브러리입니다. 다양한 머신러닝 알고리즘을 제공하며, 데이터 분석 및 모델링 작업을 간편하게 만들어줍니다.
+## 머신러닝계의 공구 세트다
 
-**2. 핵심 개념:**
+전동 드릴, 렌치, 드라이버를 저마다 다른 방식으로 쥐고 돌려야 한다면 작업은 엉망이 된다. **Scikit-learn은 수십 종의 머신러닝 알고리즘에 똑같은 손잡이를 달아 놓은 공구 세트다.** 회귀든 분류든 군집화든, 도구를 바꿔도 쥐는 법은 항상 같다.
 
-*   **지도 학습 (Supervised Learning):** 레이블(정답)이 있는 데이터를 사용하여 모델을 훈련시키는 학습 방법입니다. Scikit-learn은 회귀 및 분류와 같은 다양한 지도 학습 알고리즘을 지원합니다.
-*   **비지도 학습 (Unsupervised Learning):** 레이블이 없는 데이터에서 패턴을 찾거나 데이터를 그룹화하는 학습 방법입니다. 군집화 및 차원 축소를 위한 알고리즘을 제공합니다.
-*   **모델 훈련 (Model Training):** 모델이 학습 데이터에서 패턴을 학습하여 새로운 데이터에 대한 예측을 수행할 수 있도록 하는 과정입니다.
-*   **피쳐 (Feature):** 모델 학습에 사용되는 데이터의 개별 속성 또는 변수입니다.
-*   **평가 지표 (Evaluation Metrics):** 모델의 성능을 측정하는 데 사용되는 지표입니다. 정확도, 정밀도, 재현율, F1 점수 등이 있습니다.
+그 손잡이는 세 개의 메서드로 요약된다.
 
-**3. 작동 방식:**
+- `fit(X, y)` — 데이터로 모델을 학습시킨다.
+- `predict(X)` — 학습한 모델로 새 데이터를 예측한다.
+- `transform(X)` — 데이터를 변환한다(전처리·차원 축소 등).
 
-Scikit-learn은 다음과 같은 단계를 통해 머신러닝 모델을 구축합니다.
+[선형 회귀](Machine_Learning.md)를 [랜덤 포레스트](Random_Forest.md)로 바꾸든 [SVM](Support_Vector_Machine___SVM.md)으로 바꾸든, 코드에서 바뀌는 건 모델을 만드는 한 줄뿐이다. 나머지 `fit`·`predict`는 그대로다. 이 일관성이 Scikit-learn의 핵심 가치다.
 
-1.  **데이터 준비:** 데이터를 Scikit-learn이 사용할 수 있는 형식으로 불러옵니다.
-2.  **데이터 전처리:** 데이터의 품질을 개선하고 모델에 적합하게 변환합니다 (결측치 처리, 정규화 등).
-3.  **모델 선택:** 문제 유형(회귀, 분류 등) 및 데이터 특성에 맞는 모델을 선택합니다.
-4.  **모델 훈련:** 준비된 데이터를 사용하여 모델을 훈련시킵니다.
-5.  **모델 평가:** 훈련된 모델을 테스트 데이터에 적용하여 성능을 평가합니다.
-6.  **모델 튜닝:** 필요에 따라 모델의 하이퍼파라미터를 조정하여 성능을 개선합니다.
+## 데이터는 표, 정답은 열로 넣는다
 
-**4. 응용 분야:**
+Scikit-learn은 데이터를 **2차원 배열 `X`**(행은 샘플, 열은 [특성](Feature_Engineering.md))와 **정답 벡터 `y`**로 받는다. 이 규약 하나로 [NumPy](NumPy.md) 배열이든 [Pandas](Pandas.md) 데이터프레임이든 그대로 흘려보낼 수 있다.
 
-*   **분류 (Classification):** 스팸 메일 감지, 이미지 분류 (고양이 vs. 개), 고객 세분화
-*   **회귀 (Regression):** 주가 예측, 부동산 가격 예측, 수요 예측
-*   **차원 축소 (Dimensionality Reduction):** 데이터 시각화, 특징 추출
-*   **데이터 클러스터링 (Clustering):** 고객 그룹핑, 이상 탐지
-*   **특징 추출 (Feature Extraction):**  텍스트 마이닝, 자연어 처리
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
-**5. 관련 용어:**
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
-*   **넘파이 (NumPy):**  Scikit-learn에서 사용되는 수치 계산을 위한 핵심 라이브러리입니다.
-*   **판다스 (Pandas):**  데이터 조작 및 분석을 위한 라이브러리입니다. Scikit-learn과 함께 데이터 처리에 자주 사용됩니다.
-*   **그리드 검색 (Grid Search):**  모델의 하이퍼파라미터 최적화를 위한 Scikit-learn의 기능입니다.
-*   **교차 검증 (Cross-Validation):** 모델 성능을 보다 신뢰성 있게 평가하기 위한 방법입니다.
-*   **딥러닝 (Deep Learning):**  인공 신경망을 사용하여 복잡한 패턴을 학습하는 머신러닝의 한 분야입니다.
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)          # 학습
+pred = model.predict(X_test)         # 예측
+print(accuracy_score(y_test, pred))  # 평가
+```
+
+전처리·모델을 하나로 묶는 `Pipeline`, 하이퍼파라미터를 자동 탐색하는 [`GridSearchCV`](Grid_Search.md), 신뢰할 만한 성능을 재는 [교차 검증](CrossValidation.md)도 모두 같은 `fit`/`predict` 규약 위에서 돌아간다.
+
+## 흔한 오해
+
+> ⚠️ **흔한 오해 — "Scikit-learn으로 딥러닝도 하면 되겠네."**
+>
+> Scikit-learn은 신경망 학습을 위한 도구가 아니다. GPU 가속도, 자동 미분도, 복잡한 신경망 구성도 지원하지 않는다. 간단한 `MLPClassifier`가 있긴 하지만 실전용은 아니다. 신경망·딥러닝은 [TensorFlow](TensorFlow.md)나 [PyTorch](PyTorch.md)의 몫이고, Scikit-learn은 그 앞단의 **정형 데이터 머신러닝**에서 빛난다.
+
+## 언제 쓰나
+
+| 상황 | Scikit-learn이 맞나 |
+|------|--------------------|
+| 표 형태의 정형 데이터로 분류·회귀 | 맞다. 가장 먼저 꺼낼 도구다 |
+| [군집화](Clustering.md)·[차원 축소](Dimensionality_Reduction.md) 같은 비지도 작업 | 맞다 |
+| 전처리·모델·평가를 한 파이프라인으로 | 맞다 |
+| 이미지·음성·자연어 딥러닝, GPU 대규모 학습 | 아니다. TensorFlow·PyTorch로 |
+
+## 정리하면
+
+- Scikit-learn은 고전 머신러닝 알고리즘을 **`fit`/`predict`/`transform`** 이라는 하나의 사용법으로 통일한 라이브러리다.
+- 데이터는 특성 행렬 `X`와 정답 `y`로 넣고, 모델만 바꿔 끼우면 나머지 코드는 그대로다.
+- [지도학습](Supervised_Learning.md)·[자율학습](Unsupervised_Learning.md), 전처리, 교차 검증, 하이퍼파라미터 탐색까지 한 틀 안에 있다.
+- 딥러닝은 담당이 아니다. 정형 데이터 머신러닝의 표준 출발점으로 쓴다.
+
+## 함께 읽기
+
+- [NumPy](NumPy.md) — Scikit-learn이 데이터를 담는 배열의 토대.
+- [Pandas](Pandas.md) — 데이터프레임을 그대로 `X`로 흘려보낼 수 있는 짝꿍.
+- [Cross-Validation](CrossValidation.md) — Scikit-learn으로 성능을 신뢰성 있게 재는 법.
+- [Grid Search](Grid_Search.md) — 같은 틀 위에서 하이퍼파라미터를 자동 탐색.
+- [TensorFlow](TensorFlow.md) — Scikit-learn이 손대지 않는 딥러닝을 맡는 프레임워크.

@@ -1,12 +1,28 @@
 # AI Study Glossary
 
-인공지능 개발을 위한 필수 용어집 📚  
-AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지 – 실무 중심의 스터디를 위한 핵심 용어를 정리했습니다.  
-이 목록은 "내가 무엇을 모르는지" 파악하여 효과적으로 학습 계획을 세우기 위한 목적을 가지고 만들어졌습니다.
+인공지능을 공부하려는 사람을 위한 한국어 용어집이다. 📚
 
-* 단언선정: ChatGPT + Gemini pro 2.5
-* 코드생성: Claude
-* 단어해설: Gemma3
+AI 이론·머신러닝·딥러닝·데이터 처리·모델 학습과 평가·MLOps, 그리고 LLM 시대의 핵심 개념까지 한자리에 모았다. **"내가 무엇을 모르는지"를 스스로 파악하고 학습 계획을 세우도록 돕는 것**이 이 용어집의 목표다.
+
+각 용어는 딱딱한 사전식 정의로 시작하지 않는다. **비유로 개념을 먼저 심고 → 원리를 한 계단씩 풀고 → 입문자가 흔히 하는 오해를 짚고 → 관련 용어로 잇는** 방식으로 설명한다. 모든 해설은 한 사람이 쓴 것처럼 같은 문체(반말 평서문 "~다")로 통일했다. 문체·구조 기준은 [AUTHORING.md](AUTHORING.md)에 정리해 두었다.
+
+* **용어 선정**: ChatGPT + Gemini 2.5 Pro
+* **해설 작성·보강**: Claude (Opus)
+* **초안 생성(구버전)**: Gemma3
+
+> 처음이라면 [Machine Learning](explanations/Machine_Learning.md) → [Neural Network](explanations/Neural_Network.md) → [Deep Learning](explanations/Deep_Learning.md) → [Transformer](explanations/Transformer.md) → [Large Language Model](explanations/Large_Language_Model___LLM.md) 순서로 읽으면 큰 흐름이 잡힌다.
+
+## 목차
+
+1. [기초 개념 및 이론](#기초-개념-및-이론)
+2. [데이터 처리 및 준비](#데이터-처리-및-준비)
+3. [머신러닝 알고리즘 및 기법](#머신러닝-알고리즘-및-기법)
+4. [딥러닝 아키텍처 및 개념](#딥러닝-아키텍처-및-개념)
+5. [생성형 AI 및 대규모 언어 모델](#생성형-ai-및-대규모-언어-모델)
+6. [모델 학습 및 평가](#모델-학습-및-평가)
+7. [MLOps, 배포 및 모니터링](#mlops-배포-및-모니터링)
+8. [주요 프레임워크 및 라이브러리](#주요-프레임워크-및-라이브러리)
+9. [기타 관련 분야 및 개념](#기타-관련-분야-및-개념)
 
 ---
 
@@ -31,7 +47,7 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Dempster‑Shafer Theory](explanations/DempsterShafer_Theory.md) (Dempster‑Shafer 이론)
 * [Entropy](explanations/Entropy.md) (엔트로피)
 * [Expert System](explanations/Expert_System.md) (전문가 시스템)
-* [Explainable AI – XAI](explanations/Explainable_AI___XAI.md) (설명가능 AI)
+* [Explainable AI – XAI](explanations/Explainable_AI___XAI.md) (설명가능 AI)
 * [First‑order Logic](explanations/Firstorder_Logic.md) (일차논리)
 * [Fuzzy Inference](explanations/Fuzzy_Inference.md) (퍼지 추론)
 * [Fuzzy Logic](explanations/Fuzzy_Logic.md) (퍼지 논리)
@@ -41,17 +57,17 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Halting Problem](explanations/Halting_Problem.md) (멈춤문제)
 * [Heuristic](explanations/Heuristic.md) (휴리스틱)
 * [Inference Engine](explanations/Inference_Engine.md) (추론엔진)
-* [Intelligent Agent](explanations/Intelligent_Agent.md) (지능적 에이전트)
-* [Internet of Things](explanations/Internet_of_Things.md) (사물인터넷)
+* [Intelligent Agent](explanations/Intelligent_Agent.md) (지능적 에이전트)
+* [Internet of Things](explanations/Internet_of_Things.md) (사물인터넷)
 * [Knowledge Engineering](explanations/Knowledge_Engineering.md) (지식공학)
 * [Lambda Calculus](explanations/Lambda_Calculus.md) (람다 계산법)
 * [Machine Learning](explanations/Machine_Learning.md) (머신러닝)
-* [Meta‑Learning](explanations/MetaLearning.md) (메타 학습)
+* [Meta‑Learning](explanations/MetaLearning.md) (메타 학습)
 * [Neuroscience](explanations/Neuroscience.md) (신경과학)
-* [NP‑complete / NP‑hard](explanations/NPcomplete__NPhard.md) (NP‑완전 / NP‑난해)
+* [NP‑complete / NP‑hard](explanations/NPcomplete__NPhard.md) (NP‑완전 / NP‑난해)
 * [Ontology](explanations/Ontology.md) (온톨로지)
 * [Optimization](explanations/Optimization.md) (최적화)
-* [Parallel Computing](explanations/Parallel_Computing.md) (병렬 컴퓨팅)
+* [Parallel Computing](explanations/Parallel_Computing.md) (병렬 컴퓨팅)
 * [Pattern Recognition](explanations/Pattern_Recognition.md) (패턴인식)
 * [Predicate Logic](explanations/Predicate_Logic.md) (술어논리)
 * [Probabilistic Reasoning](explanations/Probabilistic_Reasoning.md) (확률추론)
@@ -60,14 +76,14 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Semantic Network](explanations/Semantic_Network.md) (의미망)
 * [Semantic Web](explanations/Semantic_Web.md) (의미웹)
 * [State Space](explanations/State_Space.md) (상태공간)
-* [Temporal Reasoning](explanations/Temporal_Reasoning.md) (시간 추론)
+* [Temporal Reasoning](explanations/Temporal_Reasoning.md) (시간 추론)
 * [Theorem Proving](explanations/Theorem_Proving.md) (정리증명)
 * [Turing Machine](explanations/Turing_Machine.md) (튜링 기계)
 * [Turing Test](explanations/Turing_Test.md) (튜링 테스트)
 
 ---
 
-## 데이터 처리 및 준비 (Data Handling & Preparation)
+## 데이터 처리 및 준비
 
 * [Data Augmentation](explanations/Data_Augmentation.md) (데이터 증강)
 * [Data Leakage](explanations/Data_Leakage.md) (데이터 누수)
@@ -87,9 +103,9 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 
 ---
 
-## 머신러닝 알고리즘 및 기법 (Machine Learning Algorithms & Techniques)
+## 머신러닝 알고리즘 및 기법
 
-* [A* Algorithm](explanations/A_Algorithm.md) (A* 알고리즘)
+* [A* Algorithm](explanations/A_Algorithm.md) (A* 알고리즘)
 * [Adaline](explanations/Adaline.md) (아달라인)
 * [Backward Chaining Inference](explanations/Backward_Chaining_Inference.md) (역방향추론)
 * [Backtracking](explanations/Backtracking.md) (역추적)
@@ -109,7 +125,7 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Hidden Markov Model](explanations/Hidden_Markov_Model.md) (은닉 마르코프 모델)
 * [Hopfield Network](explanations/Hopfield_Network.md) (홉필드 네트워크)
 * [Kalman Filter](explanations/Kalman_Filter.md) (칼만필터)
-* [K‑means Algorithm](explanations/Kmeans_Algorithm.md) (K‑means 알고리즘)
+* [K‑means Algorithm](explanations/Kmeans_Algorithm.md) (K‑means 알고리즘)
 * [K‑Nearest Neighbor Classification](explanations/KNearest_Neighbor_Classification.md) (K‑최근린 분류)
 * [Naive Bayesian Classification](explanations/Naive_Bayesian_Classification.md) (나이브 베이즈 분류)
 * [Perceptron](explanations/Perceptron.md) (퍼셉트론)
@@ -118,7 +134,7 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Reinforcement Learning](explanations/Reinforcement_Learning.md) (강화학습)
 * [Self‑Organizing Map](explanations/SelfOrganizing_Map.md) (자기조직화 지도)
 * [Supervised Learning](explanations/Supervised_Learning.md) (지도학습)
-* [Support Vector Machine – SVM](explanations/Support_Vector_Machine___SVM.md) (서포트 벡터 머신)
+* [Support Vector Machine – SVM](explanations/Support_Vector_Machine___SVM.md) (서포트 벡터 머신)
 * [Unsupervised Learning](explanations/Unsupervised_Learning.md) (자율학습)
 
 ---
@@ -131,21 +147,22 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Backpropagation](explanations/Backpropagation.md) (역전파)
 * [Batch Normalization](explanations/Batch_Normalization.md) (배치 정규화)
 * [BERT](explanations/BERT.md) (양방향 인코더 표현)
-* [Convolutional Neural Network – CNN](explanations/Convolutional_Neural_Network___CNN.md) (컨볼루션 신경망)
+* [Convolutional Neural Network – CNN](explanations/Convolutional_Neural_Network___CNN.md) (컨볼루션 신경망)
 * [Deep Learning](explanations/Deep_Learning.md) (딥 러닝)
+* [Diffusion Model](explanations/Diffusion_Model.md) (확산 모델)
 * [Dropout](explanations/Dropout.md) (드롭아웃)
 * [Federated Learning](explanations/Federated_Learning.md) (연합 학습)
-* [Generative Adversarial Network – GAN](explanations/Generative_Adversarial_Network___GAN.md) (생성적 적대 신경망)
+* [Generative Adversarial Network – GAN](explanations/Generative_Adversarial_Network___GAN.md) (생성적 적대 신경망)
 * [GPT](explanations/GPT.md) (사전학습 생성 변환기)
 * [Gradient Descent](explanations/Gradient_Descent.md) (기울기 하강)
-* [Graph Neural Network – GNN](explanations/Graph_Neural_Network___GNN.md) (그래프 신경망)
+* [Graph Neural Network – GNN](explanations/Graph_Neural_Network___GNN.md) (그래프 신경망)
 * [GRU](explanations/GRU.md) (Gated Recurrent Unit)
-* [Long Short‑Term Memory – LSTM](explanations/Long_ShortTerm_Memory___LSTM.md) (장단기 메모리)
+* [Long Short‑Term Memory – LSTM](explanations/Long_ShortTerm_Memory___LSTM.md) (장단기 메모리)
 * [Max Pooling](explanations/Max_Pooling.md) (맥스 풀링)
 * [Multi‑Head Attention](explanations/MultiHead_Attention.md) (다중 헤드 어텐션)
 * [Multilayer Perceptron](explanations/Multilayer_Perceptron.md) (다층 퍼셉트론)
 * [Neural Network](explanations/Neural_Network.md) (신경망)
-* [Recurrent Neural Network – RNN](explanations/Recurrent_Neural_Network___RNN.md) (순환 신경망)
+* [Recurrent Neural Network – RNN](explanations/Recurrent_Neural_Network___RNN.md) (순환 신경망)
 * [Self‑Attention](explanations/SelfAttention.md) (셀프 어텐션)
 * [Self‑Supervised Learning](explanations/SelfSupervised_Learning.md) (자기지도 학습)
 * [Sigmoid](explanations/Sigmoid.md) (시그모이드 함수)
@@ -156,10 +173,27 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 
 ---
 
+## 생성형 AI 및 대규모 언어 모델
+
+* [Embedding](explanations/Embedding.md) (임베딩)
+* [Fine‑tuning](explanations/Fine_Tuning.md) (미세조정)
+* [Foundation Model](explanations/Foundation_Model.md) (파운데이션 모델)
+* [Hallucination](explanations/Hallucination.md) (환각)
+* [Large Language Model – LLM](explanations/Large_Language_Model___LLM.md) (대규모 언어 모델)
+* [LoRA](explanations/LoRA.md) (저차원 적응)
+* [Mixture of Experts – MoE](explanations/Mixture_of_Experts___MoE.md) (전문가 혼합)
+* [Multimodal AI](explanations/Multimodal_AI.md) (멀티모달 AI)
+* [Prompt Engineering](explanations/Prompt_Engineering.md) (프롬프트 엔지니어링)
+* [Retrieval‑Augmented Generation – RAG](explanations/Retrieval_Augmented_Generation___RAG.md) (검색 증강 생성)
+* [RLHF](explanations/RLHF.md) (인간 피드백 기반 강화학습)
+* [Vector Database](explanations/Vector_Database.md) (벡터 데이터베이스)
+
+---
+
 ## 모델 학습 및 평가
 
 * [Adam](explanations/Adam.md) (Adam 옵티마이저)
-* [AUC](explanations/AUC.md) (Area Under the Curve)
+* [AUC](explanations/AUC.md) (Area Under the Curve)
 * [Batch Size](explanations/Batch_Size.md) (배치 크기)
 * [Bias](explanations/Bias.md) (편향)
 * [Confusion Matrix](explanations/Confusion_Matrix.md) (혼동 행렬)
@@ -192,6 +226,7 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Distributed Computing](explanations/Distributed_Computing.md) (분산 컴퓨팅)
 * [Experiment Tracking](explanations/Experiment_Tracking.md) (실험 추적)
 * [Feature Store](explanations/Feature_Store.md) (피처 스토어)
+* [Knowledge Distillation](explanations/Knowledge_Distillation.md) (지식 증류)
 * [MLflow](explanations/MLflow.md) (MLflow)
 * [MLOps](explanations/MLOps.md) (Machine Learning Operations)
 * [Model Monitoring](explanations/Model_Monitoring.md) (모델 모니터링)
@@ -219,3 +254,12 @@ AI 이론, 머신러닝, 딥러닝, 모델 학습, 데이터 처리, MLOps까지
 * [Time Series Analysis](explanations/Time_Series_Analysis.md) (시계열분석)
 * [Zero‑shot Learning](explanations/Zeroshot_Learning.md) (제로샷 학습)
 
+---
+
+## 기여 · 문체 가이드
+
+이 용어집에 해설을 추가하거나 다듬을 때는 [AUTHORING.md](AUTHORING.md)의 문체·구조·mermaid 규칙을 따른다. 새 용어를 반자동으로 초안 생성하려면 [create-explanations.py](create-explanations.py)를 참고한다(로컬 Ollama 필요).
+
+## 라이선스
+
+[LICENSE](LICENSE) 참조.
