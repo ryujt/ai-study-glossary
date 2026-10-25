@@ -1,265 +1,123 @@
-# AI Study Glossary
+# AI 활용 개발 용어집
 
-인공지능을 공부하려는 사람을 위한 한국어 용어집이다. 📚
+AI로 코드를 작성하고, 버그를 고치고, 테스트와 리뷰를 진행하는 개발자를 위한 한국어 용어집이다. 모델을 직접 학습하거나 AI 핵심 기술을 구현하는 지식 대신, 개발 도구를 이해하고 결과를 검증하는 데 필요한 46개 용어를 다룬다.
 
-AI 이론·머신러닝·딥러닝·데이터 처리·모델 학습과 평가·MLOps, 그리고 LLM 시대의 핵심 개념까지 한자리에 모았다. **"내가 무엇을 모르는지"를 스스로 파악하고 학습 계획을 세우도록 돕는 것**이 이 용어집의 목표다.
+## 대상 독자
 
-각 용어는 딱딱한 사전식 정의로 시작하지 않는다. **비유로 개념을 먼저 심고 → 원리를 한 계단씩 풀고 → 입문자가 흔히 하는 오해를 짚고 → 관련 용어로 잇는** 방식으로 설명한다. 모든 해설은 한 사람이 쓴 것처럼 같은 문체(반말 평서문 "~다")로 통일했다. 문체·구조 기준은 [AUTHORING.md](AUTHORING.md)에 정리해 두었다.
+기본적인 코드 작성과 Git 사용을 배우는 신입 개발자부터 AI 코딩 도구를 업무에 쓰는 개발자까지 읽을 수 있다. 머신러닝 지식이나 수학은 필요하지 않다. 각 글은 짧은 정의, 개발 예시, 기억할 점, 관련 용어로 구성한다.
 
-* **용어 선정**: ChatGPT + Gemini 2.5 Pro
-* **해설 작성·보강**: Claude (Opus)
-* **초안 생성(구버전)**: Gemma3
+## 읽는 순서
 
-> 처음이라면 [Machine Learning](explanations/Machine_Learning.md) → [Neural Network](explanations/Neural_Network.md) → [Deep Learning](explanations/Deep_Learning.md) → [Transformer](explanations/Transformer.md) → [Large Language Model](explanations/Large_Language_Model___LLM.md) 순서로 읽으면 큰 흐름이 잡힌다.
+필요한 용어부터 찾아 읽어도 된다. 처음이라면 아래 순서를 권한다.
+
+1. [AI 보조 개발](./explanations/AI_Assisted_Development.md) → [LLM](./explanations/Large_Language_Model___LLM.md) → [환각](./explanations/Hallucination.md): 무엇을 맡길 수 있고 무엇을 확인해야 하는지 이해한다.
+2. [프롬프트](./explanations/Prompt.md) → [컨텍스트 엔지니어링](./explanations/Context_Engineering.md) → [저장소 지침](./explanations/Repository_Instructions.md): 작업과 프로젝트 정보를 전달한다.
+3. [에이전트](./explanations/Agent.md) → [하네스](./explanations/Agent_Harness.md) → [루프 엔지니어링](./explanations/Loop_Engineering.md): 작업이 실행되고 반복되는 구조를 이해한다.
+4. [완료 조건](./explanations/Acceptance_Criteria.md) → [AI 생성 코드 리뷰](./explanations/Code_Review.md) → [가드레일](./explanations/Guardrails.md): 결과와 권한을 관리한다.
+
+## 헷갈리기 쉬운 네 가지 엔지니어링
+
+| 용어 | 다루는 질문 | 개발 예시 |
+| --- | --- | --- |
+| [프롬프트 엔지니어링](./explanations/Prompt_Engineering.md) | 어떤 요청을 할까? | 재현 절차와 기대 동작을 요청에 적는다. |
+| [컨텍스트 엔지니어링](./explanations/Context_Engineering.md) | 어떤 정보를 언제 줄까? | 관련 코드와 로그를 골라 제공한다. |
+| [하네스 엔지니어링](./explanations/Harness_Engineering.md) | 어떤 환경과 규칙에서 실행할까? | 도구·검사 명령·권한 설정을 개선한다. |
+| [루프 엔지니어링](./explanations/Loop_Engineering.md) | 어떻게 작업을 이어 가고 끝낼까? | 작업 선택·실행·검증·기록·재시도·종료를 연결한다. |
+
+서로 겹치는 개념이다. 특히 루프 엔지니어링은 최근 실무에서 쓰이는 표현으로, 고정된 표준 분류는 아니다. [Addy Osmani의 설명](https://addyosmani.com/blog/loop-engineering/)을 참고하되, 이 용어집에서는 개발자가 적용할 수 있는 작업 방식에 초점을 둔다.
 
 ## 목차
 
-1. [기초 개념 및 이론](#기초-개념-및-이론)
-2. [데이터 처리 및 준비](#데이터-처리-및-준비)
-3. [머신러닝 알고리즘 및 기법](#머신러닝-알고리즘-및-기법)
-4. [딥러닝 아키텍처 및 개념](#딥러닝-아키텍처-및-개념)
-5. [생성형 AI 및 대규모 언어 모델](#생성형-ai-및-대규모-언어-모델)
-6. [모델 학습 및 평가](#모델-학습-및-평가)
-7. [MLOps, 배포 및 모니터링](#mlops-배포-및-모니터링)
-8. [주요 프레임워크 및 라이브러리](#주요-프레임워크-및-라이브러리)
-9. [기타 관련 분야 및 개념](#기타-관련-분야-및-개념)
+### 1. AI 도구를 이해하는 기본 용어
 
----
+모델의 응답과 한계를 이해하는 데 필요한 개념이다.
 
-## 기초 개념 및 이론
+- [대규모 언어 모델 (LLM)](./explanations/Large_Language_Model___LLM.md) — 코드와 설명을 생성하는 모델의 역할을 이해한다.
+- [생성형 AI (Generative AI)](./explanations/Generative_AI.md) — AI가 만드는 결과물을 개발의 출발점으로 활용한다.
+- [토큰과 토큰화 (Token & Tokenization)](./explanations/Tokenization.md) — 입력과 출력의 양을 세는 단위를 이해한다.
+- [컨텍스트 윈도 (Context Window)](./explanations/Context_Window.md) — 한 번에 다룰 수 있는 정보량의 한계를 이해한다.
+- [환각 (Hallucination)](./explanations/Hallucination.md) — 그럴듯한 오류를 알아보고 근거로 확인한다.
+- [멀티모달 AI (Multimodal AI)](./explanations/Multimodal_AI.md) — 화면 캡처 등 여러 종류의 입력을 활용한다.
+- [추론 모델 (Reasoning Model)](./explanations/Reasoning_Model.md) — 복잡한 문제 풀이와 사용량의 관계를 이해한다.
 
-* [Abduction](explanations/Abduction.md) (상정논법)
-* [Actuator](explanations/Actuator.md) (액추에이터)
-* [Adaptive Resonance Theory](explanations/Adaptive_Resonance_Theory.md) (적응공명이론)
-* [Agent](explanations/Agent.md) (에이전트)
-* [Alpha‑Beta Pruning](explanations/AlphaBeta_Pruning.md) (알파베타 가지치기)
-* [Approximate Reasoning](explanations/Approximate_Reasoning.md) (근사추론)
-* [Associative Memory](explanations/Associative_Memory.md) (연상메모리)
-* [Automata](explanations/Automata.md) (오토마타)
-* [Bayesian Inference](explanations/Bayesian_Inference.md) (베이즈 추론)
-* [Bayesian Network](explanations/Bayesian_Network.md) (베이즈 네트워크)
-* [Bayesian Probability](explanations/Bayesian_Probability.md) (베이즈 확률)
-* [Case‑Based Reasoning](explanations/CaseBased_Reasoning.md) (사례기반 추론)
-* [Cellular Automata](explanations/Cellular_Automata.md) (세포자동자)
-* [Certainty Factor](explanations/Certainty_Factor.md) (확신도)
-* [Chomsky Hierarchy](explanations/Chomsky_Hierarchy.md) (촘스키계층)
-* [Constraint Satisfaction Problem](explanations/Constraint_Satisfaction_Problem.md) (제약조건 만족 문제)
-* [Dempster‑Shafer Theory](explanations/DempsterShafer_Theory.md) (Dempster‑Shafer 이론)
-* [Entropy](explanations/Entropy.md) (엔트로피)
-* [Expert System](explanations/Expert_System.md) (전문가 시스템)
-* [Explainable AI – XAI](explanations/Explainable_AI___XAI.md) (설명가능 AI)
-* [First‑order Logic](explanations/Firstorder_Logic.md) (일차논리)
-* [Fuzzy Inference](explanations/Fuzzy_Inference.md) (퍼지 추론)
-* [Fuzzy Logic](explanations/Fuzzy_Logic.md) (퍼지 논리)
-* [Fuzzy Set](explanations/Fuzzy_Set.md) (퍼지 집합)
-* [Game Theory](explanations/Game_Theory.md) (게임이론)
-* [Graph Theory](explanations/Graph_Theory.md) (그래프 이론)
-* [Halting Problem](explanations/Halting_Problem.md) (멈춤문제)
-* [Heuristic](explanations/Heuristic.md) (휴리스틱)
-* [Inference Engine](explanations/Inference_Engine.md) (추론엔진)
-* [Intelligent Agent](explanations/Intelligent_Agent.md) (지능적 에이전트)
-* [Internet of Things](explanations/Internet_of_Things.md) (사물인터넷)
-* [Knowledge Engineering](explanations/Knowledge_Engineering.md) (지식공학)
-* [Lambda Calculus](explanations/Lambda_Calculus.md) (람다 계산법)
-* [Machine Learning](explanations/Machine_Learning.md) (머신러닝)
-* [Meta‑Learning](explanations/MetaLearning.md) (메타 학습)
-* [Neuroscience](explanations/Neuroscience.md) (신경과학)
-* [NP‑complete / NP‑hard](explanations/NPcomplete__NPhard.md) (NP‑완전 / NP‑난해)
-* [Ontology](explanations/Ontology.md) (온톨로지)
-* [Optimization](explanations/Optimization.md) (최적화)
-* [Parallel Computing](explanations/Parallel_Computing.md) (병렬 컴퓨팅)
-* [Pattern Recognition](explanations/Pattern_Recognition.md) (패턴인식)
-* [Predicate Logic](explanations/Predicate_Logic.md) (술어논리)
-* [Probabilistic Reasoning](explanations/Probabilistic_Reasoning.md) (확률추론)
-* [Problem Solving](explanations/Problem_Solving.md) (문제해결)
-* [Rule‑base Expert System](explanations/Rulebase_Expert_System.md) (규칙기반 전문가 시스템)
-* [Semantic Network](explanations/Semantic_Network.md) (의미망)
-* [Semantic Web](explanations/Semantic_Web.md) (의미웹)
-* [State Space](explanations/State_Space.md) (상태공간)
-* [Temporal Reasoning](explanations/Temporal_Reasoning.md) (시간 추론)
-* [Theorem Proving](explanations/Theorem_Proving.md) (정리증명)
-* [Turing Machine](explanations/Turing_Machine.md) (튜링 기계)
-* [Turing Test](explanations/Turing_Test.md) (튜링 테스트)
+### 2. 요청과 프로젝트 맥락
 
----
+원하는 작업과 필요한 정보를 AI에 전달하는 방법이다.
 
-## 데이터 처리 및 준비
+- [프롬프트 (Prompt)](./explanations/Prompt.md) — 목표와 조건을 구체적으로 전달한다.
+- [프롬프트 엔지니어링 (Prompt Engineering)](./explanations/Prompt_Engineering.md) — 요청을 다듬고 결과가 나아지는지 확인한다.
+- [컨텍스트 엔지니어링 (Context Engineering)](./explanations/Context_Engineering.md) — 필요한 정보를 골라 적절한 시점에 제공한다.
+- [퓨샷 프롬프팅 (Few-shot Prompting)](./explanations/Fewshot_Learning.md) — 예시로 원하는 결과의 패턴을 보여 준다.
+- [컨텍스트 압축 (Context Compaction)](./explanations/Context_Compaction.md) — 긴 기록을 줄일 때 보존할 정보를 구분한다.
+- [에이전트 메모리 (Agent Memory)](./explanations/Agent_Memory.md) — 다음 작업에 필요한 정보를 대화 밖에 남긴다.
+- [저장소 지침 (Repository Instructions)](./explanations/Repository_Instructions.md) — 프로젝트 규칙과 작업 명령을 문서로 공유한다.
+- [명세 (Specification)](./explanations/Specification.md) — 구현 전에 요구와 예외를 정리한다.
 
-* [Data Augmentation](explanations/Data_Augmentation.md) (데이터 증강)
-* [Data Leakage](explanations/Data_Leakage.md) (데이터 누수)
-* [Data Mining](explanations/Data_Mining.md) (데이터 마이닝)
-* [Data Preprocessing](explanations/Data_Preprocessing.md) (데이터 전처리)
-* [Dimensionality Reduction](explanations/Dimensionality_Reduction.md) (차원 축소)
-* [Feature Engineering](explanations/Feature_Engineering.md) (특성 공학)
-* [Imbalanced Data](explanations/Imbalanced_Data.md) (불균형 데이터)
-* [Labeling](explanations/Labeling.md) (레이블링)
-* [PCA](explanations/PCA.md) (주성분 분석)
-* [t‑SNE](explanations/tSNE.md) (t‑분포 확률적 임베딩)
-* [Text Mining](explanations/Text_Mining.md) (텍스트마이닝)
-* [Tokenization](explanations/Tokenization.md) (토큰화)
-* [Train/Test Split](explanations/TrainTest_Split.md) (학습/테스트 분할)
-* [Validation Set](explanations/Validation_Set.md) (검증 데이터셋)
-* [Word Embedding](explanations/Word_Embedding.md) (단어 임베딩)
+### 3. 에이전트와 반복 작업
 
----
+작업 환경을 마련하고 여러 단계를 이어 가는 방법이다.
 
-## 머신러닝 알고리즘 및 기법
+- [AI 보조 개발 (AI-assisted Development)](./explanations/AI_Assisted_Development.md) — 조사부터 리뷰까지 AI와 협업하는 방식을 익힌다.
+- [바이브 코딩 (Vibe Coding)](./explanations/Vibe_Coding.md) — 코드 검토를 생략하는 개발 방식의 의미와 한계를 이해한다.
+- [에이전트 (Agent)](./explanations/Agent.md) — AI가 도구를 사용해 여러 단계를 수행하는 방식을 이해한다.
+- [에이전트 루프 (Agent Loop)](./explanations/Agent_Loop.md) — 행동과 결과 확인이 반복되는 구조를 이해한다.
+- [에이전트 하네스 (Agent Harness)](./explanations/Agent_Harness.md) — 모델의 작업을 가능하게 하는 주변 환경을 이해한다.
+- [하네스 엔지니어링 (Harness Engineering)](./explanations/Harness_Engineering.md) — 도구·규칙·검사를 개선해 반복되는 실패를 줄인다.
+- [루프 엔지니어링 (Loop Engineering)](./explanations/Loop_Engineering.md) — 작업 선택부터 검증·기록·종료까지 반복 체계를 설계한다.
+- [워크플로 (Workflow)](./explanations/Workflow.md) — 개발 단계를 정하고 단계마다 AI를 활용한다.
+- [서브에이전트 (Subagent)](./explanations/Subagent.md) — 하위 작업을 나눠 맡길 때의 역할과 한계를 이해한다.
+- [에이전트 스킬 (Agent Skills)](./explanations/Agent_Skills.md) — 특정 작업의 절차와 자료를 재사용한다.
+- [훅 (Hooks)](./explanations/Hooks.md) — 정해진 시점의 처리와 검사를 자동화한다.
+- [워크트리 (Git Worktree)](./explanations/Worktree.md) — 동시 작업의 파일 공간을 분리한다.
 
-* [A* Algorithm](explanations/A_Algorithm.md) (A* 알고리즘)
-* [Adaline](explanations/Adaline.md) (아달라인)
-* [Backward Chaining Inference](explanations/Backward_Chaining_Inference.md) (역방향추론)
-* [Backtracking](explanations/Backtracking.md) (역추적)
-* [Bayesian Optimization](explanations/Bayesian_Optimization.md) (베이지안 최적화)
-* [Boltzmann Machine](explanations/Boltzmann_Machine.md) (볼쯔만 머신)
-* [Breadth First Search](explanations/Breadth_First_Search.md) (너비우선 탐색)
-* [Clustering](explanations/Clustering.md) (군집화)
-* [Decision Tree](explanations/Decision_Tree.md) (의사결정 트리)
-* [Depth First Search](explanations/Depth_First_Search.md) (깊이우선 탐색)
-* [Ensemble Methods](explanations/Ensemble_Methods.md) (앙상블 기법)
-* [Evolutionary Algorithm](explanations/Evolutionary_Algorithm.md) (진화알고리즘)
-* [Evolutionary Programming](explanations/Evolutionary_Programming.md) (진화프로그래밍)
-* [Expectation Maximization Algorithm](explanations/Expectation_Maximization_Algorithm.md) (기대치최대화 알고리즘)
-* [Genetic Algorithm](explanations/Genetic_Algorithm.md) (유전알고리즘)
-* [Gradient Boosting](explanations/Gradient_Boosting.md) (그래디언트 부스팅)
-* [Grid Search](explanations/Grid_Search.md) (그리드 서치)
-* [Hidden Markov Model](explanations/Hidden_Markov_Model.md) (은닉 마르코프 모델)
-* [Hopfield Network](explanations/Hopfield_Network.md) (홉필드 네트워크)
-* [Kalman Filter](explanations/Kalman_Filter.md) (칼만필터)
-* [K‑means Algorithm](explanations/Kmeans_Algorithm.md) (K‑means 알고리즘)
-* [K‑Nearest Neighbor Classification](explanations/KNearest_Neighbor_Classification.md) (K‑최근린 분류)
-* [Naive Bayesian Classification](explanations/Naive_Bayesian_Classification.md) (나이브 베이즈 분류)
-* [Perceptron](explanations/Perceptron.md) (퍼셉트론)
-* [Random Forest](explanations/Random_Forest.md) (랜덤 포레스트)
-* [Random Search](explanations/Random_Search.md) (랜덤 서치)
-* [Reinforcement Learning](explanations/Reinforcement_Learning.md) (강화학습)
-* [Self‑Organizing Map](explanations/SelfOrganizing_Map.md) (자기조직화 지도)
-* [Supervised Learning](explanations/Supervised_Learning.md) (지도학습)
-* [Support Vector Machine – SVM](explanations/Support_Vector_Machine___SVM.md) (서포트 벡터 머신)
-* [Unsupervised Learning](explanations/Unsupervised_Learning.md) (자율학습)
+### 4. 도구 연결과 자료 검색
 
----
+AI가 프로젝트 밖의 기능과 근거 자료를 활용하는 방식이다.
 
-## 딥러닝 아키텍처 및 개념
+- [도구 사용 (Tool Use / Function Calling)](./explanations/Tool_Use.md) — 모델의 요청이 실제 명령 실행으로 이어지는 과정을 이해한다.
+- [MCP (Model Context Protocol)](./explanations/MCP.md) — 외부 도구와 자료를 연결하는 공통 규약을 이해한다.
+- [검색 증강 생성 (RAG)](./explanations/Retrieval_Augmented_Generation___RAG.md) — 관련 자료를 찾아 답변의 근거로 활용한다.
+- [임베딩 (Embedding)](./explanations/Embedding.md) — 의미가 비슷한 자료를 찾는 검색 방식을 이해한다.
+- [벡터 데이터베이스 (Vector Database)](./explanations/Vector_Database.md) — 임베딩을 저장하고 검색하는 역할을 이해한다.
 
-* [Activation Function](explanations/Activation_Function.md) (활성화 함수)
-* [Attention](explanations/Attention.md) (주의집중)
-* [Autoencoder](explanations/Autoencoder.md) (오토인코더)
-* [Backpropagation](explanations/Backpropagation.md) (역전파)
-* [Batch Normalization](explanations/Batch_Normalization.md) (배치 정규화)
-* [BERT](explanations/BERT.md) (양방향 인코더 표현)
-* [Convolutional Neural Network – CNN](explanations/Convolutional_Neural_Network___CNN.md) (컨볼루션 신경망)
-* [Deep Learning](explanations/Deep_Learning.md) (딥 러닝)
-* [Diffusion Model](explanations/Diffusion_Model.md) (확산 모델)
-* [Dropout](explanations/Dropout.md) (드롭아웃)
-* [Federated Learning](explanations/Federated_Learning.md) (연합 학습)
-* [Generative Adversarial Network – GAN](explanations/Generative_Adversarial_Network___GAN.md) (생성적 적대 신경망)
-* [GPT](explanations/GPT.md) (사전학습 생성 변환기)
-* [Gradient Descent](explanations/Gradient_Descent.md) (기울기 하강)
-* [Graph Neural Network – GNN](explanations/Graph_Neural_Network___GNN.md) (그래프 신경망)
-* [GRU](explanations/GRU.md) (Gated Recurrent Unit)
-* [Long Short‑Term Memory – LSTM](explanations/Long_ShortTerm_Memory___LSTM.md) (장단기 메모리)
-* [Max Pooling](explanations/Max_Pooling.md) (맥스 풀링)
-* [Multi‑Head Attention](explanations/MultiHead_Attention.md) (다중 헤드 어텐션)
-* [Multilayer Perceptron](explanations/Multilayer_Perceptron.md) (다층 퍼셉트론)
-* [Neural Network](explanations/Neural_Network.md) (신경망)
-* [Recurrent Neural Network – RNN](explanations/Recurrent_Neural_Network___RNN.md) (순환 신경망)
-* [Self‑Attention](explanations/SelfAttention.md) (셀프 어텐션)
-* [Self‑Supervised Learning](explanations/SelfSupervised_Learning.md) (자기지도 학습)
-* [Sigmoid](explanations/Sigmoid.md) (시그모이드 함수)
-* [Softmax](explanations/Softmax.md) (소프트맥스 함수)
-* [ReLU](explanations/ReLU.md) (Rectified Linear Unit, 렐루)
-* [Transformer](explanations/Transformer.md) (트랜스포머)
-* [Transfer Learning](explanations/Transfer_Learning.md) (전이 학습)
+### 5. 검증과 권한 관리
 
----
+완료를 확인하고 맡길 수 있는 범위를 정하는 기준이다.
 
-## 생성형 AI 및 대규모 언어 모델
+- [완료 조건 (Acceptance Criteria)](./explanations/Acceptance_Criteria.md) — 완료를 확인할 수 있는 기준을 적는다.
+- [평가 (Evaluation / Evals)](./explanations/Evaluation.md) — 같은 사례와 기준으로 작업 결과를 비교한다.
+- [AI 생성 코드 리뷰 (Reviewing AI-generated Code)](./explanations/Code_Review.md) — 생성된 코드의 의도와 동작을 검토한다.
+- [사람의 개입 (Human-in-the-loop)](./explanations/Human_in_the_Loop.md) — 사람이 확인하거나 결정할 지점을 정한다.
+- [가드레일 (Guardrails)](./explanations/Guardrails.md) — 행동과 결과에 검사와 제한을 둔다.
+- [샌드박스 (Sandbox)](./explanations/Sandbox.md) — 명령이 접근할 수 있는 실행 범위를 제한한다.
+- [프롬프트 인젝션 (Prompt Injection)](./explanations/Prompt_Injection.md) — 참고 자료에 섞인 악의적인 지시를 경계한다.
+- [민감정보 보호 (Sensitive Data Protection)](./explanations/Privacy_Preservation.md) — AI가 접근하거나 전송하는 민감정보를 관리한다.
+- [체크포인트 (Checkpoint)](./explanations/Checkpoint.md) — 잘못된 변경을 복구할 기준점을 남긴다.
 
-* [Embedding](explanations/Embedding.md) (임베딩)
-* [Fine‑tuning](explanations/Fine_Tuning.md) (미세조정)
-* [Foundation Model](explanations/Foundation_Model.md) (파운데이션 모델)
-* [Hallucination](explanations/Hallucination.md) (환각)
-* [Large Language Model – LLM](explanations/Large_Language_Model___LLM.md) (대규모 언어 모델)
-* [LoRA](explanations/LoRA.md) (저차원 적응)
-* [Mixture of Experts – MoE](explanations/Mixture_of_Experts___MoE.md) (전문가 혼합)
-* [Multimodal AI](explanations/Multimodal_AI.md) (멀티모달 AI)
-* [Prompt Engineering](explanations/Prompt_Engineering.md) (프롬프트 엔지니어링)
-* [Retrieval‑Augmented Generation – RAG](explanations/Retrieval_Augmented_Generation___RAG.md) (검색 증강 생성)
-* [RLHF](explanations/RLHF.md) (인간 피드백 기반 강화학습)
-* [Vector Database](explanations/Vector_Database.md) (벡터 데이터베이스)
+### 6. 모델과 사용량
 
----
+작업에 맞는 모델을 고르고 사용량을 관리하는 개념이다.
 
-## 모델 학습 및 평가
+- [모델 선택 (Model Selection)](./explanations/Model_Selection.md) — 실제 작업의 품질·시간·비용으로 모델을 고른다.
+- [토큰 예산 (Token Budget)](./explanations/Token_Budget.md) — 반복 실행까지 고려해 사용량을 계획한다.
+- [호출 제한 (Rate Limit)](./explanations/Rate_Limit.md) — 요청 수와 처리량의 제한을 이해한다.
+- [프롬프트 캐싱 (Prompt Caching)](./explanations/Prompt_Caching.md) — 반복 입력의 처리를 재사용하는 방식을 이해한다.
+- [구조화된 출력 (Structured Output)](./explanations/Structured_Output.md) — 후속 도구가 읽을 수 있는 형식으로 결과를 받는다.
 
-* [Adam](explanations/Adam.md) (Adam 옵티마이저)
-* [AUC](explanations/AUC.md) (Area Under the Curve)
-* [Batch Size](explanations/Batch_Size.md) (배치 크기)
-* [Bias](explanations/Bias.md) (편향)
-* [Confusion Matrix](explanations/Confusion_Matrix.md) (혼동 행렬)
-* [Cross‑Entropy](explanations/CrossEntropy.md) (교차 엔트로피)
-* [Cross‑Validation](explanations/CrossValidation.md) (교차 검증)
-* [Early Stopping](explanations/Early_Stopping.md) (조기 종료)
-* [Epoch](explanations/Epoch.md) (에포크)
-* [F1 Score](explanations/F1_Score.md) (F1 점수)
-* [Hyperparameter Tuning](explanations/Hyperparameter_Tuning.md) (하이퍼파라미터 튜닝)
-* [Learning Rate Scheduler](explanations/Learning_Rate_Scheduler.md) (학습률 스케줄러)
-* [Loss Function](explanations/Loss_Function.md) (손실 함수)
-* [Mean Squared Error](explanations/Mean_Squared_Error.md) (MSE, 평균 제곱 오차)
-* [Optimizer](explanations/Optimizer.md) (옵티마이저)
-* [Overfitting](explanations/Overfitting.md) (과적합)
-* [Precision](explanations/Precision.md) (정밀도)
-* [Recall](explanations/Recall.md) (재현율)
-* [Regularization](explanations/Regularization.md) (정규화)
-* [RMSprop](explanations/RMSprop.md) (RMSprop 옵티마이저)
-* [ROC Curve](explanations/ROC_Curve.md) (ROC 곡선)
-* [SGD](explanations/SGD.md) (Stochastic Gradient Descent, SGD)
-* [Underfitting](explanations/Underfitting.md) (과소적합)
+## 범위와 근거
 
----
+신경망 구조, 학습 알고리즘, 모델 훈련 지표, 학습용 프레임워크의 상세 해설은 다루지 않는다. 검색에 쓰는 임베딩과 RAG도 도구 사용자가 알아야 할 수준으로 설명한다.
 
-## MLOps, 배포 및 모니터링
+자료 확인 기준일은 **2026-10-26**이다. 바뀔 수 있는 제품 동작과 최근 용어는 해당 글에 공식 문서나 원문 링크를 남겼다. 예시는 특정 제품의 기능을 보장하는 설명이 아니며, 지원 기능·권한·요금은 사용하는 도구의 문서에서 확인한다.
 
-* [Concept Drift](explanations/Concept_Drift.md) (개념 드리프트)
-* [Containerization](explanations/Containerization.md) (컨테이너화)
-* [Data Drift](explanations/Data_Drift.md) (데이터 드리프트)
-* [Distributed Computing](explanations/Distributed_Computing.md) (분산 컴퓨팅)
-* [Experiment Tracking](explanations/Experiment_Tracking.md) (실험 추적)
-* [Feature Store](explanations/Feature_Store.md) (피처 스토어)
-* [Knowledge Distillation](explanations/Knowledge_Distillation.md) (지식 증류)
-* [MLflow](explanations/MLflow.md) (MLflow)
-* [MLOps](explanations/MLOps.md) (Machine Learning Operations)
-* [Model Monitoring](explanations/Model_Monitoring.md) (모델 모니터링)
-* [Model Quantization](explanations/Model_Quantization.md) (모델 양자화)
-* [Model Serving](explanations/Model_Serving.md) (모델 서빙)
-* [Pruning](explanations/Pruning.md) (가지치기/프루닝)
-* [Privacy Preservation](explanations/Privacy_Preservation.md) (프라이버시 보존)
+## 기여와 검증
 
----
+용어를 추가하거나 수정할 때는 [집필 원칙](./AUTHORING.md)을 따른다. 목차와 관련 용어 링크도 함께 갱신한 뒤 아래 명령으로 문서 구조와 내부 링크를 확인한다. Python 3 표준 라이브러리만 사용한다.
 
-## 주요 프레임워크 및 라이브러리
-
-* [Keras](explanations/Keras.md) (케라스)
-* [NumPy](explanations/NumPy.md) (넘파이)
-* [Pandas](explanations/Pandas.md) (판다스)
-* [PyTorch](explanations/PyTorch.md) (파이토치)
-* [Scikit‑learn](explanations/Scikitlearn.md) (사이킷런)
-* [TensorFlow](explanations/TensorFlow.md) (텐서플로)
-
----
-
-## 기타 관련 분야 및 개념
-
-* [Few‑shot Learning](explanations/Fewshot_Learning.md) (소수 예제 학습)
-* [Time Series Analysis](explanations/Time_Series_Analysis.md) (시계열분석)
-* [Zero‑shot Learning](explanations/Zeroshot_Learning.md) (제로샷 학습)
-
----
-
-## 기여 · 문체 가이드
-
-이 용어집에 해설을 추가하거나 다듬을 때는 [AUTHORING.md](AUTHORING.md)의 문체·구조·mermaid 규칙을 따른다. 새 용어를 반자동으로 초안 생성하려면 [create-explanations.py](create-explanations.py)를 참고한다(로컬 Ollama 필요).
+```bash
+python3 scripts/check_content.py
+```
 
 ## 라이선스
 
-[LICENSE](LICENSE) 참조.
+[MIT 라이선스](./LICENSE)를 따른다.
